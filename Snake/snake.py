@@ -16,7 +16,6 @@ class Snake:
         self.create_snake()
         self.head = self.snake[0]
 
-
     def create_snake(self):
         for position in STARTING_POSITIONS:
             self.add_body_part(position)
@@ -62,3 +61,12 @@ class Snake:
     def snake_bigger(self):
         self.add_body_part(self.snake[-1].position())
 
+    def reset(self):
+        # we make a loop to clear each body part from the screen
+        for body_part in self.snake:
+            body_part.goto(1000, 1000)
+
+        # remove all body part from the list
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
