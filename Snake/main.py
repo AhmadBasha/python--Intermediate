@@ -27,12 +27,12 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.left, "Left")
 screen.onkey(snake.right, "Right")
 
-speed = 0.1
+# speed = 0.1
 
 while game_started:
     # to update the graphics when all body part moved forward
     screen.update()
-    time.sleep(speed)
+    time.sleep(0.07)
 
     snake.move_snake()
     # when the snake hit the food
@@ -40,19 +40,23 @@ while game_started:
         food.random_location()
         scoreboard.increase_score()
         snake.snake_bigger()
-        speed -= 0.003
+        # speed -= 0.003
 
     # when the snake hit the wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_started = False
-        scoreboard.gameover()
+        # game_started = False
+        # scoreboard.gameover()
+        scoreboard.reset()
+        snake.reset()
 
     # collision with the tail
     for snake_body_part in snake.snake[1:]:
-        # if snake_body_part == snake.head:
-        #     pass
+        if snake_body_part == snake.head:
+            pass
         if snake.head.distance(snake_body_part) < 10:
-            game_started = False
-            scoreboard.gameover()
+            # game_started = False
+            # scoreboard.gameover()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
